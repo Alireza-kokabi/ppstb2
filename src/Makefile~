@@ -1,0 +1,99 @@
+
+
+
+all: 	Socket Messenger FileReader Client VME_FPGAUnitV1495 VME_BridgeVx718 VME_CFDV812 VME_CAENETControllerV288 VME_IOModuleV262 VME_TDCV1x90 NIM_HVModuleN470 VMEReader test_vme
+
+
+
+
+	
+Socket:			Socket.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o Socket.o -c Socket.cpp
+
+	g++ -shared -o libSocket.so Socket.o  
+	mv libSocket.so ../lib
+
+
+Messenger:		Messenger.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o Messenger.o -c Messenger.cpp
+
+	g++ -shared -o libMessenger.so Messenger.o  
+	mv libMessenger.so ../lib
+
+
+FileReader:		FileReader.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o FileReader.o -c FileReader.cpp
+
+	g++ -shared -o libFileReader.so FileReader.o  
+	mv libFileReader.so ../lib
+
+
+Client:			Client.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o Client.o -c Client.cpp
+
+	g++ -shared -o libClient.so Client.o  
+	mv libClient.so ../lib
+
+
+VME_FPGAUnitV1495:	VME_FPGAUnitV1495.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VME_FPGAUnitV1495.o -c VME_FPGAUnitV1495.cpp
+
+	g++ -shared -o libVME_FPGAUnitV1495.so VME_FPGAUnitV1495.o  
+	mv libVME_FPGAUnitV1495.so ../lib
+
+
+VME_BridgeVx718:	VME_BridgeVx718.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VME_BridgeVx718.o -c VME_BridgeVx718.cpp
+
+	g++ -shared -o libVME_BridgeVx718.so VME_BridgeVx718.o  
+	mv libVME_BridgeVx718.so ../lib
+
+
+VME_CFDV812:		VME_CFDV812.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VME_CFDV812.o -c VME_CFDV812.cpp
+
+	g++ -shared -o libVME_CFDV812.so VME_CFDV812.o  
+	mv libVME_CFDV812.so ../lib
+
+
+VME_CAENETControllerV288:	VME_CAENETControllerV288.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VME_CAENETControllerV288.o -c VME_CAENETControllerV288.cpp
+
+	g++ -shared -o libVME_CAENETControllerV288.so VME_CAENETControllerV288.o  
+	mv libVME_CAENETControllerV288.so ../lib
+
+
+VME_IOModuleV262:		VME_IOModuleV262.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VME_IOModuleV262.o -c VME_IOModuleV262.cpp
+
+	g++ -shared -o libVME_IOModuleV262.so VME_IOModuleV262.o  
+	mv libVME_IOModuleV262.so ../lib
+
+
+VME_TDCV1x90:			VME_TDCV1x90.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VME_TDCV1x90.o -c VME_TDCV1x90.cpp
+
+	g++ -shared -o libVME_TDCV1x90.so VME_TDCV1x90.o  
+	mv libVME_TDCV1x90.so ../lib
+
+
+NIM_HVModuleN470:		NIM_HVModuleN470.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o NIM_HVModuleN470.o -c NIM_HVModuleN470.cpp
+
+	g++ -shared -o libNIM_HVModuleN470.so NIM_HVModuleN470.o  
+	mv libNIM_HVModuleN470.so ../lib
+
+
+VMEReader:			VMEReader.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -o VMEReader.o -c VMEReader.cpp
+
+	g++ -shared -o libVMEReader.so VMEReader.o  
+	mv libVMEReader.so ../lib
+
+
+test_vme:		test_vme2.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../include -I../external -L../lib -L/usr/lib test_vme2.cpp -lSocket -lClient -lVME_FPGAUnitV1495 -lVME_BridgeVx718 -lVME_CFDV812 -lVME_CAENETControllerV288 -lVME_IOModuleV262 -lVME_TDCV1x90 -lNIM_HVModuleN470 -lWebSocket -lsha1 -lbase64 -lsqlite3 -ltinyxml2 -lCAENVME -lFileReader -lMessenger -lVMEReader
+
+
+clean:
+

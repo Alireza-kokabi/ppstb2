@@ -1,0 +1,25 @@
+
+all:  sha1 base64 WebSocket
+
+
+
+sha1: 	sha1.cpp
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../../include -o sha1.o -c sha1/sha1.cpp
+	g++ -shared -o sha1.so sha1.o   
+	mv $@ ../lib
+	cd ..
+
+base64: base64.cpp  
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../../include -o base64.o -c base64/base64.cpp
+	g++ -shared -o base64.so base64.o   
+	mv $@ ../lib
+	cd ..
+
+WebSocket:	
+	WebSocket.cpp  
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../../include -o WebSocket.o -c WebSocket.cpp
+	g++ -shared -o WebSocket.so WebSocket.o     
+	mv $@ ../lib
+
+clean:
+

@@ -1,0 +1,46 @@
+CC              = gcc
+CXX             = g++
+CCFlags         = -g -O1 -Wall -fPIC  
+
+IncludeDirs	=  ../include ../external
+
+IncludePaths		= $(IncludeDirs:%=-I%)
+
+LibraryDirs = ../lib
+LibraryPaths = $(LibraryDirs:%=-L%)
+
+ExternalObjects = $(LibraryPaths) 
+
+
+all: Socket Client VME_FPGAUnitV1495 VME_BridgeVx718 ThresholdTest test_vme
+
+
+g++ -g -O1 -Wall -fPIC -I../include -I../external -o Socket.o -c Socket.cpp
+
+Socket: $(CXX) $(CCFlags) -shared -o Socket.so $< $(IncludePaths) $(ExternalObjects)  
+	mv Socket.so ../lib
+
+Client: $(CXX) $(CCFlags) $(IncludePaths) -c Client.cpp -o Client.o  
+Client:	$(CXX) $(CCFlags) -shared -o Client.so $< $(IncludePaths) $(ExternalObjects) -DLINUX
+	mv Client.so ../lib
+
+VME_FPGAUnitV1495: 	
+	$(CXX) $(CCFlags) $(IncludePaths) -c VME_FPGAUnitV1495.cpp -o VME_FPGAUnitV1495.o
+VME_FPGAUnitV1495: 	
+	$(CXX) $(CCFlags) -shared -o VME_FPGAUnitV1495.so $< $(IncludePaths) $(ExternalObjects) -DLINUX
+	mv VME_FPGAUnitV1495.so ../lib
+
+VME_BridgeVx718: VME_BridgeVx718.cpp 
+	$(CXX) $(CCFlags) -shared -o VME_BridgeVx718.so $< $(IncludePaths) $(ExternalObjects) -DLINUX
+	mv VME_BridgeVx718.so ../lib
+
+ThresholdTest: ThresholdTest.cpp
+	$(CXX) $(CCFlags) -shared -o ThresholdTest.so $< $(IncludePaths) $(ExternalObjects) -DLINUX
+	mv ThresholdTest.so ../lib
+
+test_vme: test_vme.cpp
+	$(CXX) $(CCFlags) -o $@ $< $(IncludePaths) $(ExternalObjects) -lSocket -lClient -lVME_FPGAUnitV1495 -lVME_BridgeVx718 -lThresholdTest -DLINUX 
+
+
+clean:
+

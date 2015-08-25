@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--<triggering mode="continuous_storage" />-->
+<!--<triggering mode="trigger_start" />-->
+<triggering mode="trigger_matching" />
+<fpga address="0x00ee0000">
+  <clock>
+    <source>internal</source>
+    <period>1</period>
+  </clock>
+  <trigger>
+    <source>external</source>
+    <period>1</period>
+  </trigger>
+  <signal>
+    <source>internal</source>
+    <poi>4294967295</poi>
+  </signal>
+</fpga>
+<tdc address="0x00aa0000">
+  <detector>gastof</detector>
+  <verbosity>1</verbosity>
+  <det_mode>trailead</det_mode>
+  <dll>PLL_High_Resolution</dll>
+  <ettt/>
+  <trigger_window>
+    <width>400</width>
+    <offset>-400</offset>
+  </trigger_window>
+</tdc>
+<tdc address="0x00bb0000">
+  <detector>quartic_2</detector>
+  <verbosity>1</verbosity>
+  <det_mode>trailead</det_mode>
+  <dll>PLL_High_Resolution</dll>
+  <ettt/>
+  <trigger_window>
+    <width>400</width>
+    <offset>-400</offset>
+  </trigger_window>
+</tdc>
+<tdc address="0x00cc0000">
+  <detector>gstof1+reference</detector>
+  <verbosity>1</verbosity>
+  <det_mode>trailead</det_mode>
+  <dll>PLL_High_Resolution</dll>
+  <ettt/>
+  <trigger_window>
+    <width>400</width>
+    <offset>-400</offset>
+  </trigger_window>
+  <poi>
+    <group0>3</group0>
+    <group1>0</group1>
+  </poi>
+</tdc>
+<cfd address="0x00070000">
+  <poi>3</poi>
+  <output_width>
+    <group0>120</group0>
+    <group1>120</group1>
+  </output_width>
+  <dead_time>
+    <group0>0</group0>
+    <group1>0</group1>
+  </dead_time>
+  <threshold>
+    <channel id="0">30</channel>
+    <channel id="1">30</channel>
+    <channel id="2">6</channel>
+  </threshold>
+</cfd>

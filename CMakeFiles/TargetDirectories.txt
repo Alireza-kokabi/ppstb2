@@ -1,0 +1,9 @@
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/HVsettings.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/det_lib.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/listener.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/ppsFetch.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/ppsRun.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/reader_lib.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/CMakeFiles/src_lib.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/test/CMakeFiles/testdb.dir
+/home/kokabi/Dropbox/Documents/Projects/Firmware/DAQ/pps-tbrc-master/external/CMakeFiles/ws_lib.dir

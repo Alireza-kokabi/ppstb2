@@ -1,0 +1,49 @@
+#include "ThresholdTest.h"
+
+ThresholdTest::ThresholdTest(const char *device, VME::BridgeType type, bool on_socket) :
+  Client(1987), fBridge(0), fFPGA(0), 
+  fOnSocket(on_socket), fIsPulserStarted(false)
+{
+  try {
+    if (fOnSocket) Client::Connect(DETECTOR);
+    fBridge = new VME::BridgeVx718(device, type);
+  } catch (Exception& e) {
+    e.Dump();
+    if (fOnSocket) Client::Send(e);
+  }
+}
+
+ThresholdTest::~ThresholdTest()
+{
+  if (fOnSocket) {
+    Client::Send(Exception(__PRETTY_FUNCTION__, "Stopping the acquisition process", Info, 30001));
+    Client::Disconnect();
+  }
+  if (fFPGA) delete fFPGA;
+  if (fBridge) delete fBridge;
+}
+
+
+void
+ThresholdTest::AddFPGAUnit(uint32_t address)
+{
+  if (!fBridge) throw Exception(__PRETTY_FUNCTION__, "No bridge detected! Aborting...", Fatal);
+  try {
+    fFPGA = new VME::FPGAUnitV1495(fBridge->GetHandle(), address);
+  } catch (Exception& e) {
+    e.Dump();
+    if (fOnSocket) Client::Send(e);
+  }
+  sleep(4); // wait for FW to be ready...
+  std::ostringstream os; os << "FPGA module with base address 0x" << std::hex << address << " successfully built";
+  throw Exception(__PRETTY_FUNCTION__, os.str(), Info, TDC_ACQ_START);
+}
+
+
+void
+ThresholdTest::Abort()
+{
+  if (!fBridge) throw Exception(__PRETTY_FUNCTION__, "No bridge detected! Aborting...", Fatal);
+}
+
+

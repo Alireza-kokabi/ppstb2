@@ -1,0 +1,50 @@
+#include "Client.h"
+#include "FileConstants.h"
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+#include <ctime>
+#include <signal.h>
+
+#define NUM_TRIG_BEFORE_FILE_CHANGE 1000
+#define PATH "/home/ppstb/timing_data/"
+
+using namespace std;
+
+VMEReader* vme;
+int gEnd = 0;
+
+void CtrlC(int aSig) {
+  if (gEnd==0) { cerr << endl << "[C-c] Trying a clean exit!" << endl; vme->Abort(); }
+  else if (gEnd>=5) { cerr << endl << "[C-c > 5 times] ... Forcing exit!" << endl; exit(0); }
+  gEnd++;
+}
+
+int main(int argc, char *argv[]) {
+  signal(SIGINT, CtrlC);
+
+
+
+
+
+    Client::Connect(DETECTOR);
+    vme = new VME::BridgeVx718("/dev/a2818_0", VME::CAEN_V2718);
+
+
+    
+    // Initialize the configuration one single time
+   
+
+    VME::FPGAUnitV1495* fpga = vme->GetFPGAUnit();
+    const bool use_fpga = (fpga!=0);
+
+   uint32_t Vth = 10 ;
+    if (use_fpga) {
+      fpga->SetThresholdVoltage(Vth);
+      std::cout << "The readback value of the Threshold Voltage is: " << fpga->GetThresholdVoltage() << std::endl;
+    }
+  
+  return 0;
+}

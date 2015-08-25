@@ -1,0 +1,14 @@
+
+all:  base64 
+
+
+
+base64: base64.cpp  
+	g++ -g -O1 -Wall -DLINUX -fPIC -I../../../include -o base64.o -c base64.cpp
+	
+	g++ -shared -o base64.so base64.o   
+	mv base64.so ../../../lib
+
+
+clean:
+
